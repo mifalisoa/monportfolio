@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Facebook, MessageCircle, Instagram, Send, Linkedin, Mail } from 'lucide-react';
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -18,16 +17,6 @@ function Navbar() {
   }, []);
 
   const navItems = ['Accueil', 'À propos', 'Projets', 'Contact'];
-
-  // Configuration des réseaux sociaux - Remplacez par vos vrais liens
-  const socialLinks = [
-    { icon: Facebook, url: 'https://facebook.com/votre-profil', label: 'Facebook' },
-    { icon: MessageCircle, url: 'https://wa.me/votre-numero', label: 'WhatsApp' },
-    { icon: Instagram, url: 'https://instagram.com/votre-profil', label: 'Instagram' },
-    { icon: Send, url: 'https://t.me/votre-username', label: 'Telegram' },
-    { icon: Linkedin, url: 'https://linkedin.com/in/votre-profil', label: 'LinkedIn' },
-    { icon: Mail, url: 'mailto:mifalisoa.dev@example.com', label: 'Email' }
-  ];
 
   const handleMobileMenuClick = (href) => {
     setIsMobileMenuOpen(false);
@@ -73,8 +62,8 @@ function Navbar() {
               />
             </div>
             
-            {/* Menu desktop avec icônes sociales intégrées - Caché sur mobile et tablette */}
-            <div className="hidden xl:flex items-center">
+            {/* Menu desktop - Visible sur desktop seulement */}
+            <div className="hidden lg:flex items-center space-x-8">
               {navItems.map((item, index) => (
                 <div
                   key={item}
@@ -116,45 +105,10 @@ function Navbar() {
                   </a>
                 </div>
               ))}
-              
-              {/* Icônes des réseaux sociaux intégrées dans le menu */}
-              {socialLinks.map((social, index) => {
-                const Icon = social.icon;
-                return (
-                  <a
-                    key={social.label}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative group p-2 rounded-full border border-cyan-400/30 hover:border-cyan-400 transition-all duration-300 hover:scale-110 ml-2"
-                    title={social.label}
-                    style={{
-                      opacity: 1,
-                      transform: 'translateY(0)',
-                      transitionDelay: `${index * 0.1 + 0.8}s`
-                    }}
-                  >
-                    <Icon 
-                      size={18} 
-                      className="text-cyan-400/70 group-hover:text-cyan-400 transition-colors duration-300" 
-                    />
-                    
-                    {/* Effet de glow au survol */}
-                    <div
-                      className="absolute inset-0 bg-cyan-400/10 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-150"
-                    />
-                    
-                    {/* Particule qui apparaît au survol */}
-                    <div className="absolute -top-1 -right-1 w-2 h-2 bg-cyan-400 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300" />
-                  </a>
-                );
-              })}
             </div>
 
-            {/* Section droite avec menu hamburger seulement */}
-            <div className="xl:hidden flex items-center ml-auto">
-
-              {/* Bouton hamburger - Visible sur tablette et mobile */}
+            {/* Bouton hamburger - Visible sur mobile et tablette */}
+            <div className="lg:hidden flex items-center ml-auto">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="flex flex-col items-center justify-center w-8 h-8 space-y-1 group"
@@ -195,7 +149,7 @@ function Navbar() {
 
       {/* Menu mobile/tablette - Overlay full screen */}
       <div
-        className={`fixed inset-0 z-40 xl:hidden transition-all duration-500 ${
+        className={`fixed inset-0 z-40 lg:hidden transition-all duration-500 ${
           isMobileMenuOpen 
             ? 'opacity-100 pointer-events-auto' 
             : 'opacity-0 pointer-events-none'
@@ -263,38 +217,6 @@ function Navbar() {
               </a>
             </div>
           ))}
-
-          {/* Réseaux sociaux dans le menu mobile */}
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            {socialLinks.map((social, index) => {
-              const Icon = social.icon;
-              return (
-                <a
-                  key={social.label}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`relative group p-3 rounded-full border border-cyan-400/30 hover:border-cyan-400 transition-all duration-300 hover:scale-110 ${
-                    isMobileMenuOpen 
-                      ? 'translate-y-0 opacity-100' 
-                      : 'translate-y-10 opacity-0'
-                  }`}
-                  title={social.label}
-                  style={{ transitionDelay: `${index * 0.1 + 0.6}s` }}
-                >
-                  <Icon 
-                    size={24} 
-                    className="text-cyan-400/70 group-hover:text-cyan-400 transition-colors duration-300" 
-                  />
-                  
-                  {/* Effet de glow au survol */}
-                  <div
-                    className="absolute inset-0 bg-cyan-400/10 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-150"
-                  />
-                </a>
-              );
-            })}
-          </div>
 
           {/* Informations de contact dans le menu mobile */}
           <div className="mt-8 text-center space-y-4">
