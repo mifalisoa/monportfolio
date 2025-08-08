@@ -323,71 +323,155 @@ function APropos() {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
-            <motion.div
-              className="bg-black/80 border-2 border-cyan-400/50 rounded-lg overflow-hidden"
-              whileHover={{
-                borderColor: 'rgba(6, 182, 212, 0.8)',
-                boxShadow: isMobile ?
-                  '0 0 20px rgba(6, 182, 212, 0.2)' :
-                  '0 0 30px rgba(6, 182, 212, 0.3)'
-              }}
-            >
-              <div className="bg-gray-900 px-3 sm:px-4 py-2 flex items-center space-x-2">
-                <div className={`rounded-full bg-red-500 ${
-                  isMobile ? 'w-2 h-2' : 'w-3 h-3'
-                }`}></div>
-                <div className={`rounded-full bg-yellow-500 ${
-                  isMobile ? 'w-2 h-2' : 'w-3 h-3'
-                }`}></div>
-                <div className={`rounded-full bg-green-500 ${
-                  isMobile ? 'w-2 h-2' : 'w-3 h-3'
-                }`}></div>
-                <span
-                  className={`ml-2 sm:ml-4 text-gray-400 ${
-                    isMobile ? 'text-xs' : 'text-xs'
-                  }`}
-                  style={{ fontFamily: 'OCR A Extended, monospace' }}
-                >
-                  {isMobile ? '~/profile.js' : '~/student/profile.js'}
-                </span>
-              </div>
-              <div className="p-4 sm:p-6">
-                <div
-                  className={`text-green-400 mb-2 ${
-                    isMobile ? 'text-xs' : 'text-sm'
-                  }`}
-                  style={{ fontFamily: 'OCR A Extended, monospace' }}
-                >
-                  $ whoami
-                </div>
-                <motion.div
-                  className={`text-cyan-400 leading-relaxed ${
-                    isMobile ? 'text-sm' : isTablet ? 'text-base' : 'text-lg'
-                  }`}
-                  style={{ fontFamily: 'OCR A Extended, monospace' }}
-                >
-                  {typedText}
-                  <motion.span
-                    animate={{ opacity: [0, 1, 0] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
+            {/* Section whoami avec informations personnelles à droite */}
+            <div className="grid lg:grid-cols-3 gap-6">
+              {/* whoami - 2 colonnes */}
+              <motion.div
+                className="lg:col-span-2 bg-black/80 border-2 border-cyan-400/50 rounded-lg overflow-hidden"
+                whileHover={{
+                  borderColor: 'rgba(6, 182, 212, 0.8)',
+                  boxShadow: isMobile ?
+                    '0 0 20px rgba(6, 182, 212, 0.2)' :
+                    '0 0 30px rgba(6, 182, 212, 0.3)'
+                }}
+              >
+                <div className="bg-gray-900 px-3 sm:px-4 py-2 flex items-center space-x-2">
+                  <div className={`rounded-full bg-red-500 ${
+                    isMobile ? 'w-2 h-2' : 'w-3 h-3'
+                  }`}></div>
+                  <div className={`rounded-full bg-yellow-500 ${
+                    isMobile ? 'w-2 h-2' : 'w-3 h-3'
+                  }`}></div>
+                  <div className={`rounded-full bg-green-500 ${
+                    isMobile ? 'w-2 h-2' : 'w-3 h-3'
+                  }`}></div>
+                  <span
+                    className={`ml-2 sm:ml-4 text-gray-400 ${
+                      isMobile ? 'text-xs' : 'text-xs'
+                    }`}
+                    style={{ fontFamily: 'OCR A Extended, monospace' }}
                   >
-                    |
-                  </motion.span>
-                </motion.div>
-                <motion.div
-                  className={`mt-4 sm:mt-6 text-purple-400 leading-relaxed ${
-                    isMobile ? 'text-xs' : isTablet ? 'text-sm' : 'text-base'
+                    {isMobile ? '~/profile.js' : '~/student/profile.js'}
+                  </span>
+                </div>
+                <div className="p-4 sm:p-6">
+                  <div
+                    className={`text-green-400 mb-2 ${
+                      isMobile ? 'text-xs' : 'text-sm'
+                    }`}
+                    style={{ fontFamily: 'OCR A Extended, monospace' }}
+                  >
+                    $ whoami
+                  </div>
+                  <motion.div
+                    className={`text-cyan-400 leading-relaxed ${
+                      isMobile ? 'text-sm' : isTablet ? 'text-base' : 'text-lg'
+                    }`}
+                    style={{ fontFamily: 'OCR A Extended, monospace' }}
+                  >
+                    {typedText}
+                    <motion.span
+                      animate={{ opacity: [0, 1, 0] }}
+                      transition={{ duration: 0.8, repeat: Infinity }}
+                    >
+                      |
+                    </motion.span>
+                  </motion.div>
+                  <motion.div
+                    className={`mt-4 sm:mt-6 text-purple-400 leading-relaxed ${
+                      isMobile ? 'text-xs' : isTablet ? 'text-sm' : 'text-base'
+                    }`}
+                    style={{ fontFamily: 'OCR A Extended, monospace' }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 3 }}
+                  >
+                    ACTUELLEMENT EN TROISIÈME ANNÉE DE LICENCE EN INFORMATIQUE À L'ENI FIANARANTSOA,
+                    J'AI ACQUIS UNE SOLIDE EXPÉRIENCE GRÂCE À MES STAGES ET FORMATIONS COMPLÉMENTAIRES.
+                  </motion.div>
+                </div>
+              </motion.div>
+
+              {/* Informations personnelles - 1 colonne */}
+              <motion.div
+                className="bg-gray-900/50 border border-purple-500/30 rounded-lg p-4 sm:p-6"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <motion.h3
+                  className={`font-bold text-purple-400 mb-4 sm:mb-6 flex items-center justify-center ${
+                    isMobile ? 'text-lg' : isTablet ? 'text-xl' : 'text-xl'
                   }`}
                   style={{ fontFamily: 'OCR A Extended, monospace' }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 3 }}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
                 >
-                  ACTUELLEMENT EN TROISIÈME ANNÉE DE LICENCE EN INFORMATIQUE À L'ENI FIANARANTSOA,
-                  J'AI ACQUIS UNE SOLIDE EXPÉRIENCE GRÂCE À MES STAGES ET FORMATIONS COMPLÉMENTAIRES.
-                </motion.div>
-              </div>
-            </motion.div>
+                  <motion.span 
+                    className="mr-2"
+                    animate={{ rotate: [0, 10, -10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    👤
+                  </motion.span>
+                  {isMobile ? 'INFOS' : 'INFOS PERSO'}
+                </motion.h3>
+                <div className="space-y-3">
+                  {personalInfo.map((info, index) => (
+                    <motion.div
+                      key={index}
+                      className="group"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.5 }}
+                      viewport={{ once: true }}
+                      whileHover={{ 
+                        scale: 1.02,
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        borderRadius: '8px',
+                        padding: '8px'
+                      }}
+                    >
+                      <div className="text-center mb-1">
+                        <motion.span 
+                          className="text-2xl"
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity, 
+                            delay: index * 0.3 
+                          }}
+                        >
+                          {info.icon}
+                        </motion.span>
+                      </div>
+                      <div 
+                        className={`text-gray-400 text-center ${
+                          isMobile ? 'text-xs' : 'text-xs'
+                        }`}
+                        style={{ fontFamily: 'OCR A Extended, monospace' }}
+                      >
+                        {info.label}
+                      </div>
+                      <motion.div 
+                        className={`text-white text-center font-semibold ${
+                          isMobile ? 'text-xs' : 'text-sm'
+                        }`}
+                        style={{ fontFamily: 'OCR A Extended, monospace' }}
+                        whileHover={{ color: '#8B5CF6' }}
+                      >
+                        {info.value}
+                      </motion.div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Section Parcours */}
             <motion.div
               className="bg-gray-900/50 border border-purple-500/30 rounded-lg p-4 sm:p-6"
               initial={{ opacity: 0, y: 50 }}
@@ -460,77 +544,9 @@ function APropos() {
                 ))}
               </div>
             </motion.div>
-            <motion.div
-              className="bg-gray-900/50 border border-purple-500/30 rounded-lg p-4 sm:p-6 mt-6"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <motion.h3
-                className={`font-bold text-purple-400 mb-4 sm:mb-6 flex items-center ${
-                  isMobile ? 'text-lg' : isTablet ? 'text-xl' : 'text-2xl'
-                }`}
-                style={{ fontFamily: 'OCR A Extended, monospace' }}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <motion.span 
-                  className="mr-2 sm:mr-3"
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  👤
-                </motion.span>
-                INFORMATIONS PERSONNELLES
-              </motion.h3>
-              <div className="space-y-2 sm:space-y-3">
-                {personalInfo.map((info, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex justify-between items-center group"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    viewport={{ once: true }}
-                    whileHover={{ 
-                      scale: 1.02,
-                      backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                      borderRadius: '8px',
-                      padding: '8px'
-                    }}
-                  >
-                    <span 
-                      className="text-gray-400 flex items-center" 
-                      style={{ fontFamily: 'OCR A Extended, monospace' }}
-                    >
-                      <motion.span 
-                        className="mr-2"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ 
-                          duration: 2, 
-                          repeat: Infinity, 
-                          delay: index * 0.3 
-                        }}
-                      >
-                        {info.icon}
-                      </motion.span>
-                      {info.label}
-                    </span>
-                    <motion.span 
-                      className="text-white" 
-                      style={{ fontFamily: 'OCR A Extended, monospace' }}
-                      whileHover={{ color: '#8B5CF6' }}
-                    >
-                      {info.value}
-                    </motion.span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
           </motion.div>
+
+          {/* Section des compétences à droite */}
           <motion.div
             className="space-y-6 sm:space-y-8 order-1 lg:order-2"
             initial={{ opacity: 0, x: isMobile ? 0 : 100 }}
