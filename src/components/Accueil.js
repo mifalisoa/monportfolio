@@ -181,15 +181,15 @@ function Accueil() {
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 via-purple-500/20 to-pink-500/20 backdrop-blur-sm"
-                  animate={{
-                    background: [
-                      'linear-gradient(45deg, rgba(6, 182, 212, 0.2), rgba(168, 85, 247, 0.2))',
-                      'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2))',
-                      'linear-gradient(225deg, rgba(236, 72, 153, 0.2), rgba(6, 182, 212, 0.2))',
-                      'linear-gradient(315deg, rgba(6, 182, 212, 0.2), rgba(168, 85, 247, 0.2))'
-                    ]
-                  }}
-                  transition={{ duration: 4, repeat: Infinity }}
+                  //animate={{
+                    //background: [
+                      //'linear-gradient(45deg, rgba(6, 182, 212, 0.2), rgba(168, 85, 247, 0.2))',
+                      //'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2))',
+                      //'linear-gradient(225deg, rgba(236, 72, 153, 0.2), rgba(6, 182, 212, 0.2))',
+                      //'linear-gradient(315deg, rgba(6, 182, 212, 0.2), rgba(168, 85, 247, 0.2))'
+                    //]
+                  //}}
+                  //transition={{ duration: 4, repeat: Infinity }}
                 />
                 
                 <img
