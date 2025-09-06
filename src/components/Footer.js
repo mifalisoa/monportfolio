@@ -568,10 +568,10 @@ function Footer() {
               transition={{ duration: 5, repeat: Infinity }}
             >
               <span className="hidden sm:inline">
-                "CODÉ AVEC ❤️ ET BEAUCOUP DE ☕ À MADAGASCAR"
+                "MERCI POUR VOTRE VISITE"
               </span>
               <span className="sm:hidden">
-                "CODÉ AVEC ❤️ À MADAGASCAR"
+                "MERCI POUR VOTRE VISITE"
               </span>
             </motion.p>
             
