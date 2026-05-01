@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import profil from '../assets/pro2.png';
+import profil from '../assets/pro3.png';
 
 function Accueil() {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  // ✅ FIX: opacity supprimée — elle faisait disparaître le titre "INGÉNIEUR" au scroll
   
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [currentWord, setCurrentWord] = useState(0);
@@ -39,7 +39,6 @@ function Accueil() {
     return () => clearInterval(interval);
   }, [words.length]);
 
-  // Fonctions utilitaires pour la responsivité
   const isMobile = windowSize.width < 768;
   const isTablet = windowSize.width >= 768 && windowSize.width < 1024;
 
@@ -47,9 +46,10 @@ function Accueil() {
     <motion.section
       id="accueil"
       className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-black via-gray-900 to-black px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-20"
-      style={{ y, opacity }}
+      style={{ y }}
+      // ✅ FIX: opacity supprimée ici — causait le fade/disparition du titre au scroll
     >
-      {/* Grille Matrix en arrière-plan - Adaptée selon la taille d'écran */}
+      {/* Grille Matrix en arrière-plan */}
       <div className="absolute inset-0 opacity-10">
         <div className={`grid h-full w-full ${
           isMobile ? 'grid-cols-10 grid-rows-15' : 
@@ -78,7 +78,7 @@ function Accueil() {
         </div>
       </div>
 
-      {/* Particules flottantes - Nombre adapté selon l'écran */}
+      {/* Particules flottantes */}
       <div className="absolute inset-0">
         {[...Array(isMobile ? 30 : isTablet ? 60 : 100)].map((_, i) => (
           <motion.div
@@ -130,7 +130,6 @@ function Accueil() {
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
           <div className="relative flex justify-center">
-            {/* Anneaux technologiques rotatifs - Taille adaptée */}
             <motion.div
               className={`relative ${
                 isMobile ? 'w-64 h-64' : 
@@ -140,24 +139,19 @@ function Accueil() {
               whileHover={{ scale: isMobile ? 1.02 : 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              {/* Anneaux - Visibles uniquement sur tablette et desktop */}
+              {/* Anneaux rotatifs - uniquement tablette et desktop */}
               {!isMobile && (
                 <>
-                  {/* Anneau extérieur */}
                   <motion.div
                     className="absolute inset-0 border-2 border-cyan-400/50 rounded-full"
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                   />
-                  
-                  {/* Anneau moyen */}
                   <motion.div
                     className="absolute inset-6 sm:inset-8 border-2 border-purple-500/50 rounded-full"
                     animate={{ rotate: -360 }}
                     transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                   />
-                  
-                  {/* Anneau intérieur */}
                   <motion.div
                     className="absolute inset-12 sm:inset-16 border border-pink-500/50 rounded-full"
                     animate={{ rotate: 360 }}
@@ -181,15 +175,6 @@ function Accueil() {
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 via-purple-500/20 to-pink-500/20 backdrop-blur-sm"
-                  //animate={{
-                    //background: [
-                      //'linear-gradient(45deg, rgba(6, 182, 212, 0.2), rgba(168, 85, 247, 0.2))',
-                      //'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2))',
-                      //'linear-gradient(225deg, rgba(236, 72, 153, 0.2), rgba(6, 182, 212, 0.2))',
-                      //'linear-gradient(315deg, rgba(6, 182, 212, 0.2), rgba(168, 85, 247, 0.2))'
-                    //]
-                  //}}
-                  //transition={{ duration: 4, repeat: Infinity }}
                 />
                 
                 <img
@@ -198,7 +183,7 @@ function Accueil() {
                   className="absolute inset-3 sm:inset-4 w-full h-full object-cover rounded-full"
                 />
                 
-                {/* Effet de scan - Adapté à la taille */}
+                {/* Effet de scan */}
                 <motion.div
                   className={`absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/30 to-transparent ${
                     isMobile ? 'h-6' : 'h-8'
@@ -209,7 +194,7 @@ function Accueil() {
               </motion.div>
             </motion.div>
 
-            {/* Éléments décoratifs flottants - Repositionnés pour mobile */}
+            {/* Éléments décoratifs flottants */}
             <motion.div
               className={`absolute bg-gradient-to-r from-cyan-400 to-blue-600 rounded-lg ${
                 isMobile ? 'w-10 h-10 -top-4 -right-4' : 
@@ -223,9 +208,7 @@ function Accueil() {
               }}
               transition={{ duration: 4, repeat: Infinity }}
             >
-              <div className={`w-full h-full bg-black/20 rounded-lg flex items-center justify-center text-white font-mono ${
-                isMobile ? 'text-xs' : 'text-xs'
-              }`}>
+              <div className="w-full h-full bg-black/20 rounded-lg flex items-center justify-center text-white font-mono text-xs">
                 01
               </div>
             </motion.div>
@@ -243,9 +226,7 @@ function Accueil() {
               }}
               transition={{ duration: 5, repeat: Infinity }}
             >
-              <div className={`w-full h-full bg-black/20 rounded-full flex items-center justify-center text-white font-mono ${
-                isMobile ? 'text-xs' : 'text-xs'
-              }`}>
+              <div className="w-full h-full bg-black/20 rounded-full flex items-center justify-center text-white font-mono text-xs">
                 ∞
               </div>
             </motion.div>
@@ -259,7 +240,7 @@ function Accueil() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3, duration: 1, ease: "easeOut" }}
         >
-          {/* Titre principal avec effet de glitch */}
+          {/* Titre principal */}
           <motion.div
             className="relative mb-6 sm:mb-8"
             initial={{ opacity: 0, y: 50 }}
@@ -297,7 +278,7 @@ function Accueil() {
               </motion.span>
             </motion.h1>
             
-            {/* Effet de glitch - Réduit sur mobile */}
+            {/* Effet de glitch - uniquement desktop */}
             {!isMobile && (
               <motion.div
                 className={`absolute inset-0 font-bold leading-tight text-red-500 opacity-0 ${
@@ -347,9 +328,7 @@ function Accueil() {
                 animate={{ opacity: 1, y: 0, rotateX: 0 }}
                 exit={{ opacity: 0, y: -20, rotateX: 90 }}
                 transition={{ duration: 0.5 }}
-                style={{
-                  textShadow: '0 0 20px #00ffff'
-                }}
+                style={{ textShadow: '0 0 20px #00ffff' }}
               >
                 {words[currentWord]}
               </motion.span>
@@ -370,7 +349,7 @@ function Accueil() {
             </motion.h3>
           </motion.div>
 
-          {/* Citation avec effet de machine à écrire */}
+          {/* Citation */}
           <motion.p
             className={`text-gray-400 mb-8 sm:mb-12 max-w-2xl leading-relaxed tracking-wide ${
               isMobile ? 'text-sm px-2' : 
@@ -422,8 +401,6 @@ function Accueil() {
               <span className="relative z-10 group-hover:text-black transition-colors duration-500">
                 {isMobile ? 'MES PROJETS' : 'DÉCOUVRIR MES PROJETS'}
               </span>
-              
-              {/* Effet de ligne de code */}
               <motion.div
                 className="absolute top-0 left-0 w-full h-0.5 bg-white"
                 initial={{ scaleX: 0 }}
@@ -457,9 +434,8 @@ function Accueil() {
             </motion.a>
           </motion.div>
 
-          {/* Statistiques animées avec indicateur de scroll */}
+          {/* Statistiques + indicateur scroll desktop */}
           <div className="flex flex-col lg:flex-row lg:items-end lg:space-x-8">
-            {/* Statistiques */}
             <motion.div
               className={`flex justify-center lg:justify-start mt-8 sm:mt-12 ${
                 isMobile ? 'space-x-4' : 'space-x-8'
@@ -501,9 +477,7 @@ function Accueil() {
                     {stat.value}
                   </motion.div>
                   <div 
-                    className={`text-gray-500 tracking-widest ${
-                      isMobile ? 'text-xs' : 'text-xs'
-                    }`}
+                    className="text-gray-500 text-xs tracking-widest"
                     style={{ fontFamily: 'OCR A Extended, monospace' }}
                   >
                     {stat.label}
@@ -512,7 +486,7 @@ function Accueil() {
               ))}
             </motion.div>
 
-            {/* Indicateur de scroll à côté des statistiques sur desktop */}
+            {/* ✅ Indicateur SCROLL desktop uniquement — un seul bloc */}
             <motion.div
               className="hidden lg:flex flex-col items-center mb-4"
               initial={{ opacity: 0, y: 30 }}
@@ -533,23 +507,12 @@ function Accueil() {
                   <div className="border-2 border-cyan-400 rounded-full flex justify-center relative w-6 h-12">
                     <motion.div
                       className="bg-cyan-400 rounded-full mt-2 w-1 h-3"
-                      animate={{ 
-                        y: [0, 16, 0], 
-                        opacity: [1, 0, 1] 
-                      }}
+                      animate={{ y: [0, 16, 0], opacity: [1, 0, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     />
-                    
-                    {/* Effet de glow */}
                     <motion.div
                       className="absolute inset-0 border-2 border-cyan-400 rounded-full"
-                      animate={{ 
-                        boxShadow: [
-                          '0 0 5px #00ffff',
-                          '0 0 20px #00ffff',
-                          '0 0 5px #00ffff'
-                        ]
-                      }}
+                      animate={{ boxShadow: ['0 0 5px #00ffff', '0 0 20px #00ffff', '0 0 5px #00ffff'] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     />
                   </div>
@@ -558,7 +521,7 @@ function Accueil() {
             </motion.div>
           </div>
 
-          {/* Indicateur de scroll pour mobile et tablette - Position originale */}
+          {/* ✅ Indicateur SCROLL mobile/tablette uniquement — centré en bas */}
           <motion.div
             className="lg:hidden absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2"
             animate={{ y: [0, 15, 0] }}
@@ -566,9 +529,7 @@ function Accueil() {
           >
             <div className="flex flex-col items-center">
               <div 
-                className={`text-cyan-400 mb-2 tracking-widest ${
-                  isMobile ? 'text-xs' : 'text-xs'
-                }`}
+                className="text-cyan-400 mb-2 tracking-widest text-xs"
                 style={{ fontFamily: 'OCR A Extended, monospace' }}
               >
                 SCROLL
@@ -577,82 +538,25 @@ function Accueil() {
                 isMobile ? 'w-5 h-10' : 'w-6 h-12'
               }`}>
                 <motion.div
-                  className={`bg-cyan-400 rounded-full mt-2 ${
-                    isMobile ? 'w-0.5 h-2' : 'w-1 h-3'
-                  }`}
+                  className={`bg-cyan-400 rounded-full mt-2 ${isMobile ? 'w-0.5 h-2' : 'w-1 h-3'}`}
                   animate={{ 
                     y: isMobile ? [0, 12, 0] : [0, 16, 0], 
                     opacity: [1, 0, 1] 
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
-                
-                {/* Effet de glow */}
                 <motion.div
                   className="absolute inset-0 border-2 border-cyan-400 rounded-full"
-                  animate={{ 
-                    boxShadow: [
-                      '0 0 5px #00ffff',
-                      '0 0 20px #00ffff',
-                      '0 0 5px #00ffff'
-                    ]
-                  }}
+                  animate={{ boxShadow: ['0 0 5px #00ffff', '0 0 20px #00ffff', '0 0 5px #00ffff'] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </div>
             </div>
           </motion.div>
+          {/* ✅ FIX: Le 3ème bloc SCROLL en doublon (absolu en bas à gauche) a été supprimé */}
+
         </motion.div>
       </div> 
-
-      {/* Indicateur de scroll cyberpunk - Positionné à côté des statistiques */}
-      <motion.div
-        className={`absolute ${
-          isMobile ? 'left-4 bottom-32' : 
-          isTablet ? 'left-8 bottom-40' : 
-          'left-12 bottom-32'
-        } lg:left-auto lg:relative lg:bottom-auto lg:mt-8 lg:ml-8`}
-        animate={{ y: [0, 15, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <div className="flex flex-col items-center">
-          <div 
-            className={`text-cyan-400 mb-2 tracking-widest ${
-              isMobile ? 'text-xs' : 'text-xs'
-            }`}
-            style={{ fontFamily: 'OCR A Extended, monospace' }}
-          >
-            SCROLL
-          </div>
-          <div className={`border-2 border-cyan-400 rounded-full flex justify-center relative ${
-            isMobile ? 'w-5 h-10' : 'w-6 h-12'
-          }`}>
-            <motion.div
-              className={`bg-cyan-400 rounded-full mt-2 ${
-                isMobile ? 'w-0.5 h-2' : 'w-1 h-3'
-              }`}
-              animate={{ 
-                y: isMobile ? [0, 12, 0] : [0, 16, 0], 
-                opacity: [1, 0, 1] 
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            
-            {/* Effet de glow */}
-            <motion.div
-              className="absolute inset-0 border-2 border-cyan-400 rounded-full"
-              animate={{ 
-                boxShadow: [
-                  '0 0 5px #00ffff',
-                  '0 0 20px #00ffff',
-                  '0 0 5px #00ffff'
-                ]
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </div>
-        </div>
-      </motion.div>
     </motion.section>
   );
 }

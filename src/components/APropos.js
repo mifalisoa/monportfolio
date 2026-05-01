@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
+// ✅ FIX: useScroll et useTransform supprimés — ils causaient la bande blanche entre sections
 
 function APropos() {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 1000], [0, -50]);
+  // ✅ FIX: const { scrollY } = useScroll() supprimé
+  // ✅ FIX: const y = useTransform(scrollY, [0, 1000], [0, -50]) supprimé
+  // Ces deux lignes faisaient remonter la section APropos de 50px vers le haut
+  // créant un espace blanc visible entre APropos et Projets au scroll.
+
   const [typedText, setTypedText] = useState('');
   const [currentSkill, setCurrentSkill] = useState(0);
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
@@ -73,19 +77,15 @@ function APropos() {
           <rect x="2" y="4" width="6" height="4" fill="#FACC15" stroke="#000" strokeWidth="0.5"/>
           <rect x="2" y="8" width="6" height="1" fill="none" stroke="#000" strokeWidth="0.5"/>
           <rect x="2" y="9" width="6" height="3" fill="none" stroke="#000" strokeWidth="0.5"/>
-          
           <rect x="16" y="4" width="6" height="4" fill="#FACC15" stroke="#000" strokeWidth="0.5"/>
           <rect x="16" y="8" width="6" height="1" fill="none" stroke="#000" strokeWidth="0.5"/>
           <rect x="16" y="9" width="6" height="3" fill="none" stroke="#000" strokeWidth="0.5"/>
-          
           <rect x="9" y="14" width="6" height="4" fill="#FACC15" stroke="#000" strokeWidth="0.5"/>
           <rect x="9" y="18" width="6" height="1" fill="none" stroke="#000" strokeWidth="0.5"/>
           <rect x="9" y="19" width="6" height="3" fill="none" stroke="#000" strokeWidth="0.5"/>
-          
           <line x1="8" y1="6" x2="16" y2="6" stroke="#000" strokeWidth="1"/>
           <line x1="5" y1="12" x2="12" y2="14" stroke="#000" strokeWidth="1"/>
           <line x1="19" y1="12" x2="12" y2="14" stroke="#000" strokeWidth="1"/>
-          
           <text x="5" y="6.5" fontSize="3" fill="#000" textAnchor="middle">Class</text>
           <text x="19" y="6.5" fontSize="3" fill="#000" textAnchor="middle">Class</text>
           <text x="12" y="16.5" fontSize="3" fill="#000" textAnchor="middle">Class</text>
@@ -100,7 +100,6 @@ function APropos() {
         <svg viewBox="0 0 24 24" className="w-8 h-8">
           <path fill="#00758F" d="M16.405 5.501c-.115 0-.193.014-.274.033v.013h.014c.054.104.146.18.214.273.054.107.1.214.154.32l.014-.015c.094-.066.14-.172.14-.333-.04-.047-.046-.094-.08-.14-.04-.067-.126-.1-.18-.154l-.003.003zM5.77 18.695h-.927a50.854 50.854 0 00-.27-4.41h-.008l-1.41 4.41H2.45l-1.4-4.41h-.01a72.892 72.892 0 00-.195 4.41H.055c.055-1.966.192-3.81.41-5.53h1.15l1.335 4.064h.008l1.347-4.064h1.095c.242 1.72.384 3.564.422 5.53zM9.97 18.695h-.889a.48.48 0 01-.027-.32c-.676.633-1.38.961-2.11.961-.296 0-.555-.073-.774-.218a1.57 1.57 0 01-.504-.36 1.49 1.49 0 01-.17-.551c-.028-.1-.041-.325-.041-.674 0-.394.056-.747.167-1.053.111-.307.252-.553.424-.738.172-.185.367-.328.583-.431.216-.102.419-.152.608-.152.528 0 1.015.201 1.461.604v-2.129c0-.329-.014-.549-.041-.66a.794.794 0 00-.185-.407c-.1-.088-.234-.172-.402-.252-.169-.08-.37-.12-.607-.12-.061 0-.154.007-.275.02-.122.014-.24.033-.353.058-.114.025-.214.055-.301.09-.087.035-.138.058-.152.07a.49.49 0 01-.081.04c-.007.043-.11.158-.31.343a4.07 4.07 0 00-.659-.146c.036-.132.085-.234.147-.307.062-.072.143-.119.244-.141.1-.021.21-.039.33-.054.119-.014.226-.021.318-.021.381 0 .72.056 1.017.167.296.111.549.271.758.479.208.208.36.455.456.741.095.285.143.594.143.926v4.33zm-.889-2.95c-.465-.398-.9-.597-1.305-.597-.219 0-.402.065-.548.194a.8.8 0 00-.134.163 2.448 2.448 0 00-.169.4c-.053.17-.08.370-.08.598 0 .451.050.77.152.957.101.187.237.280.407.280.346 0 .735-.28 1.167-.837v-1.158z"/>
           <path fill="#F29111" d="M19.312 12.574c.738 0 1.337.599 1.337 1.337 0 .738-.599 1.337-1.337 1.337-.738 0-1.337-.599-1.337-1.337 0-.738.599-1.337 1.337-1.337z"/>
-          <path fill="#00758F" d="M22.071 18.42c-.126-.127-.33-.127-.457 0l-1.24 1.24-1.24-1.24c-.127-.127-.33-.127-.457 0-.126.127-.126.33 0 .457l1.24 1.24-1.24 1.24c-.126.127-.126.33 0 .457.064.063.147.095.229.095.081 0 .165-.032.228-.095l1.24-1.24 1.24 1.24c.063.063.147.095.228.095.082 0 .165-.032.229-.095.126-.127.126-.33 0-.457l-1.24-1.24 1.24-1.24c.126-.127.126-.33 0-.457z"/>
         </svg>
       )
     },
@@ -130,7 +129,7 @@ function APropos() {
       color: '#339933',
       logo: (
         <svg viewBox="0 0 24 24" className="w-8 h-8">
-          <path fill="#339933" d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.65-0.037,0.132-0.151,0.18-0.175l2.241,1.331c0.083,0.046,0.198,0.046,0.272,0l8.743-5.048 c0.083-0.048,0.133-0.147,0.133-0.25v-10.09c0-0.104-0.05-0.203-0.133-0.25L12.18,1.499c-0.083-0.048-0.189-0.048-0.272,0 L3.165,6.548C3.082,6.596,3.032,6.695,3.032,6.799v10.09c0,0.104,0.05,0.202,0.133,0.25l2.4,1.385 c1.302,0.651,2.098-0.116,2.098-0.885V7.57c0-0.148,0.119-0.266,0.266-0.266h1.162c0.148,0,0.266,0.118,0.266,0.266v10.069 c0,1.75-0.954,2.755-2.615,2.755c-0.51,0-0.912,0-2.035-0.553L2.469,18.205c-0.56-0.324-0.922-0.934-0.922-1.585V6.53 c0-0.651,0.361-1.26,0.922-1.585L11.076,0.163c0.551-0.315,1.296-0.315,1.847,0l8.607,4.782c0.561,0.324,0.922,0.934,0.922,1.585 v10.09c0,0.651-0.36,1.26-0.922,1.585l-8.607,4.782C12.643,23.916,12.321,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.188c0.067,0,0.13-0.026,0.18-0.073 c0.049-0.047,0.075-0.111,0.073-0.18c-0.105-1.25-0.813-2.673-4.435-2.673c-2.539,0-4.051,1.07-4.051,2.862 c0,1.934,1.498,2.464,3.895,2.703c2.88,0.29,3.104,0.711,3.104,1.273c0,0.979-0.79,1.394-2.646,1.394 c-2.331,0-2.84-0.579-3.006-1.727c-0.02-0.128-0.126-0.22-0.253-0.22h-1.188c-0.141,0-0.254,0.112-0.254,0.255 c0,1.482,0.806,3.248,4.702,3.248C17.488,17.007,19.099,15.91,19.099,13.993z"/>
+          <path fill="#339933" d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.65-0.037,0.132-0.151,0.18-0.175l2.241,1.331c0.083,0.046,0.198,0.046,0.272,0l8.743-5.048 c0.083-0.048,0.133-0.147,0.133-0.25v-10.09c0-0.104-0.05-0.203-0.133-0.25L12.18,1.499c-0.083-0.048-0.189-0.048-0.272,0 L3.165,6.548C3.082,6.596,3.032,6.695,3.032,6.799v10.09c0,0.104,0.05,0.202,0.133,0.25l2.4,1.385 c1.302,0.651,2.098-0.116,2.098-0.885V7.57c0-0.148,0.119-0.266,0.266-0.266h1.162c0.148,0,0.266,0.118,0.266,0.266v10.069 c0,1.75-0.954,2.755-2.615,2.755c-0.51,0-0.912,0-2.035-0.553L2.469,18.205c-0.56-0.324-0.922-0.934-0.922-1.585V6.53 c0-0.651,0.361-1.26,0.922-1.585L11.076,0.163c0.551-0.315,1.296-0.315,1.847,0l8.607,4.782c0.561,0.324,0.922,0.934,0.922,1.585 v10.09c0,0.651-0.36,1.26-0.922,1.585l-8.607,4.782C12.643,23.916,12.321,24,11.998,24z"/>
         </svg>
       )
     },
@@ -195,10 +194,8 @@ function APropos() {
     const updateWindowSize = () => {
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     };
-
     window.addEventListener('resize', updateWindowSize);
     updateWindowSize();
-
     return () => window.removeEventListener('resize', updateWindowSize);
   }, []);
 
@@ -226,10 +223,11 @@ function APropos() {
   }, [skills.length, isMobile]);
 
   return (
+    // ✅ FIX: style={{ y }} supprimé de cette balise — c'était la cause de la bande blanche
+    // L'effet useTransform faisait remonter la section de 50px créant un espace vide blanc
     <motion.section
       id="apropos"
       className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-black via-gray-900 to-black relative overflow-hidden px-4 sm:px-6 lg:px-8"
-      style={{ y }}
     >
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0"
@@ -248,9 +246,7 @@ function APropos() {
           .map((code, i) => (
             <motion.div
               key={i}
-              className={`absolute text-cyan-400/20 font-mono ${
-                isMobile ? 'text-xs' : 'text-sm'
-              }`}
+              className={`absolute text-cyan-400/20 font-mono ${isMobile ? 'text-xs' : 'text-sm'}`}
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -271,6 +267,7 @@ function APropos() {
             </motion.div>
           ))}
       </div>
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         <motion.div
           className="text-center mb-12 sm:mb-16 lg:mb-20 relative"
@@ -304,9 +301,7 @@ function APropos() {
             )}
           </motion.h2>
           <motion.div
-            className={`text-cyan-400 tracking-widest ${
-              isMobile ? 'text-xs' : 'text-sm'
-            }`}
+            className={`text-cyan-400 tracking-widest ${isMobile ? 'text-xs' : 'text-sm'}`}
             style={{ fontFamily: 'OCR A Extended, monospace' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -315,6 +310,7 @@ function APropos() {
             [ ÉTUDIANT_INFORMATIQUE.JSON ]
           </motion.div>
         </motion.div>
+
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
           <motion.div
             className="space-y-6 sm:space-y-8 order-2 lg:order-1"
@@ -327,57 +323,32 @@ function APropos() {
               className="bg-black/80 border-2 border-cyan-400/50 rounded-lg overflow-hidden"
               whileHover={{
                 borderColor: 'rgba(6, 182, 212, 0.8)',
-                boxShadow: isMobile ?
-                  '0 0 20px rgba(6, 182, 212, 0.2)' :
-                  '0 0 30px rgba(6, 182, 212, 0.3)'
+                boxShadow: isMobile ? '0 0 20px rgba(6, 182, 212, 0.2)' : '0 0 30px rgba(6, 182, 212, 0.3)'
               }}
             >
               <div className="bg-gray-900 px-3 sm:px-4 py-2 flex items-center space-x-2">
-                <div className={`rounded-full bg-red-500 ${
-                  isMobile ? 'w-2 h-2' : 'w-3 h-3'
-                }`}></div>
-                <div className={`rounded-full bg-yellow-500 ${
-                  isMobile ? 'w-2 h-2' : 'w-3 h-3'
-                }`}></div>
-                <div className={`rounded-full bg-green-500 ${
-                  isMobile ? 'w-2 h-2' : 'w-3 h-3'
-                }`}></div>
-                <span
-                  className={`ml-2 sm:ml-4 text-gray-400 ${
-                    isMobile ? 'text-xs' : 'text-xs'
-                  }`}
-                  style={{ fontFamily: 'OCR A Extended, monospace' }}
-                >
+                <div className={`rounded-full bg-red-500 ${isMobile ? 'w-2 h-2' : 'w-3 h-3'}`}></div>
+                <div className={`rounded-full bg-yellow-500 ${isMobile ? 'w-2 h-2' : 'w-3 h-3'}`}></div>
+                <div className={`rounded-full bg-green-500 ${isMobile ? 'w-2 h-2' : 'w-3 h-3'}`}></div>
+                <span className={`ml-2 sm:ml-4 text-gray-400 ${isMobile ? 'text-xs' : 'text-xs'}`}
+                  style={{ fontFamily: 'OCR A Extended, monospace' }}>
                   {isMobile ? '~/profile.js' : '~/student/profile.js'}
                 </span>
               </div>
               <div className="p-4 sm:p-6">
-                <div
-                  className={`text-green-400 mb-2 ${
-                    isMobile ? 'text-xs' : 'text-sm'
-                  }`}
-                  style={{ fontFamily: 'OCR A Extended, monospace' }}
-                >
+                <div className={`text-green-400 mb-2 ${isMobile ? 'text-xs' : 'text-sm'}`}
+                  style={{ fontFamily: 'OCR A Extended, monospace' }}>
                   $ whoami
                 </div>
                 <motion.div
-                  className={`text-cyan-400 leading-relaxed ${
-                    isMobile ? 'text-sm' : isTablet ? 'text-base' : 'text-lg'
-                  }`}
+                  className={`text-cyan-400 leading-relaxed ${isMobile ? 'text-sm' : isTablet ? 'text-base' : 'text-lg'}`}
                   style={{ fontFamily: 'OCR A Extended, monospace' }}
                 >
                   {typedText}
-                  <motion.span
-                    animate={{ opacity: [0, 1, 0] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
-                  >
-                    |
-                  </motion.span>
+                  <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ duration: 0.8, repeat: Infinity }}>|</motion.span>
                 </motion.div>
                 <motion.div
-                  className={`mt-4 sm:mt-6 text-purple-400 leading-relaxed ${
-                    isMobile ? 'text-xs' : isTablet ? 'text-sm' : 'text-base'
-                  }`}
+                  className={`mt-4 sm:mt-6 text-purple-400 leading-relaxed ${isMobile ? 'text-xs' : isTablet ? 'text-sm' : 'text-base'}`}
                   style={{ fontFamily: 'OCR A Extended, monospace' }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -388,6 +359,7 @@ function APropos() {
                 </motion.div>
               </div>
             </motion.div>
+
             <motion.div
               className="bg-gray-900/50 border border-purple-500/30 rounded-lg p-4 sm:p-6"
               initial={{ opacity: 0, y: 50 }}
@@ -395,71 +367,34 @@ function APropos() {
               transition={{ delay: 0.3, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3
-                className={`font-bold text-purple-400 mb-4 sm:mb-6 flex items-center ${
-                  isMobile ? 'text-lg' : isTablet ? 'text-xl' : 'text-2xl'
-                }`}
-                style={{ fontFamily: 'OCR A Extended, monospace' }}
-              >
-                <span className="mr-2 sm:mr-3">🎓</span>
-                PARCOURS
+              <h3 className={`font-bold text-purple-400 mb-4 sm:mb-6 flex items-center ${isMobile ? 'text-lg' : isTablet ? 'text-xl' : 'text-2xl'}`}
+                style={{ fontFamily: 'OCR A Extended, monospace' }}>
+                <span className="mr-2 sm:mr-3">🎓</span>PARCOURS
               </h3>
               <div className="space-y-3 sm:space-y-4">
                 {experiences.map((exp, index) => (
                   <motion.div
                     key={index}
-                    className={`p-3 bg-black/30 rounded border-l-4 border-cyan-400 ${
-                      isMobile ? 'space-y-2' : 'space-y-1'
-                    }`}
+                    className={`p-3 bg-black/30 rounded border-l-4 border-cyan-400 ${isMobile ? 'space-y-2' : 'space-y-1'}`}
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.2 }}
                     viewport={{ once: true }}
-                    whileHover={{
-                      scale: isMobile ? 1.01 : 1.02,
-                      backgroundColor: 'rgba(6, 182, 212, 0.1)'
-                    }}
+                    whileHover={{ scale: isMobile ? 1.01 : 1.02, backgroundColor: 'rgba(6, 182, 212, 0.1)' }}
                   >
-                    <div className="flex items-center justify-between">
-                      <div
-                        className={`text-cyan-400 font-bold ${
-                          isMobile ? 'text-xs' : 'text-sm'
-                        }`}
-                        style={{ fontFamily: 'OCR A Extended, monospace' }}
-                      >
-                        {exp.year}
-                      </div>
-                    </div>
-                    <div>
-                      <div
-                        className={`text-white font-semibold ${
-                          isMobile ? 'text-sm' : 'text-base'
-                        }`}
-                        style={{ fontFamily: 'OCR A Extended, monospace' }}
-                      >
-                        {exp.title}
-                      </div>
-                      <div
-                        className={`text-gray-400 ${
-                          isMobile ? 'text-xs' : 'text-sm'
-                        }`}
-                        style={{ fontFamily: 'OCR A Extended, monospace' }}
-                      >
-                        {exp.company}
-                      </div>
-                      <div
-                        className={`text-gray-500 ${
-                          isMobile ? 'text-xs' : 'text-xs'
-                        }`}
-                        style={{ fontFamily: 'OCR A Extended, monospace' }}
-                      >
-                        {exp.description}
-                      </div>
-                    </div>
+                    <div className={`text-cyan-400 font-bold ${isMobile ? 'text-xs' : 'text-sm'}`}
+                      style={{ fontFamily: 'OCR A Extended, monospace' }}>{exp.year}</div>
+                    <div className={`text-white font-semibold ${isMobile ? 'text-sm' : 'text-base'}`}
+                      style={{ fontFamily: 'OCR A Extended, monospace' }}>{exp.title}</div>
+                    <div className={`text-gray-400 ${isMobile ? 'text-xs' : 'text-sm'}`}
+                      style={{ fontFamily: 'OCR A Extended, monospace' }}>{exp.company}</div>
+                    <div className="text-gray-500 text-xs"
+                      style={{ fontFamily: 'OCR A Extended, monospace' }}>{exp.description}</div>
                   </motion.div>
                 ))}
               </div>
             </motion.div>
+
             <motion.div
               className="bg-gray-900/50 border border-purple-500/30 rounded-lg p-4 sm:p-6 mt-6"
               initial={{ opacity: 0, y: 50 }}
@@ -468,22 +403,16 @@ function APropos() {
               viewport={{ once: true }}
             >
               <motion.h3
-                className={`font-bold text-purple-400 mb-4 sm:mb-6 flex items-center ${
-                  isMobile ? 'text-lg' : isTablet ? 'text-xl' : 'text-2xl'
-                }`}
+                className={`font-bold text-purple-400 mb-4 sm:mb-6 flex items-center ${isMobile ? 'text-lg' : isTablet ? 'text-xl' : 'text-2xl'}`}
                 style={{ fontFamily: 'OCR A Extended, monospace' }}
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <motion.span 
-                  className="mr-2 sm:mr-3"
+                <motion.span className="mr-2 sm:mr-3"
                   animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  👤
-                </motion.span>
+                  transition={{ duration: 2, repeat: Infinity }}>👤</motion.span>
                 INFORMATIONS PERSONNELLES
               </motion.h3>
               <div className="space-y-2 sm:space-y-3">
@@ -495,35 +424,18 @@ function APropos() {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1, duration: 0.5 }}
                     viewport={{ once: true }}
-                    whileHover={{ 
-                      scale: 1.02,
-                      backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                      borderRadius: '8px',
-                      padding: '8px'
-                    }}
+                    whileHover={{ scale: 1.02, backgroundColor: 'rgba(139, 92, 246, 0.1)', borderRadius: '8px', padding: '8px' }}
                   >
-                    <span 
-                      className="text-gray-400 flex items-center" 
-                      style={{ fontFamily: 'OCR A Extended, monospace' }}
-                    >
-                      <motion.span 
-                        className="mr-2"
+                    <span className="text-gray-400 flex items-center" style={{ fontFamily: 'OCR A Extended, monospace' }}>
+                      <motion.span className="mr-2"
                         animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ 
-                          duration: 2, 
-                          repeat: Infinity, 
-                          delay: index * 0.3 
-                        }}
-                      >
+                        transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}>
                         {info.icon}
                       </motion.span>
                       {info.label}
                     </span>
-                    <motion.span 
-                      className="text-white" 
-                      style={{ fontFamily: 'OCR A Extended, monospace' }}
-                      whileHover={{ color: '#8B5CF6' }}
-                    >
+                    <motion.span className="text-white" style={{ fontFamily: 'OCR A Extended, monospace' }}
+                      whileHover={{ color: '#8B5CF6' }}>
                       {info.value}
                     </motion.span>
                   </motion.div>
@@ -531,6 +443,7 @@ function APropos() {
               </div>
             </motion.div>
           </motion.div>
+
           <motion.div
             className="space-y-6 sm:space-y-8 order-1 lg:order-2"
             initial={{ opacity: 0, x: isMobile ? 0 : 100 }}
@@ -546,23 +459,11 @@ function APropos() {
               viewport={{ once: true }}
             >
               <motion.h3
-                className={`font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 ${
-                  isMobile ? 'text-2xl' : isTablet ? 'text-3xl' : 'text-4xl'
-                }`}
+                className={`font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 ${isMobile ? 'text-2xl' : isTablet ? 'text-3xl' : 'text-4xl'}`}
                 style={{ fontFamily: 'OCR A Extended, monospace' }}
-                animate={{
-                  backgroundPosition: ['0%', '100%', '0%']
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
               >
                 <motion.span
-                  animate={{ 
-                    textShadow: [
-                      '0 0 10px rgba(6, 182, 212, 0.5)',
-                      '0 0 20px rgba(139, 92, 246, 0.8)',
-                      '0 0 10px rgba(6, 182, 212, 0.5)'
-                    ]
-                  }}
+                  animate={{ textShadow: ['0 0 10px rgba(6, 182, 212, 0.5)', '0 0 20px rgba(139, 92, 246, 0.8)', '0 0 10px rgba(6, 182, 212, 0.5)'] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   MES COMPÉTENCES
@@ -576,13 +477,12 @@ function APropos() {
                 viewport={{ once: true }}
               />
             </motion.div>
+
             <motion.div
               className="bg-gradient-to-br from-gray-900/80 to-black/80 border-2 border-cyan-400/50 rounded-lg p-6 sm:p-8 relative overflow-hidden"
               whileHover={{
                 borderColor: 'rgba(6, 182, 212, 1)',
-                boxShadow: isMobile ?
-                  '0 0 30px rgba(6, 182, 212, 0.2)' :
-                  '0 0 50px rgba(6, 182, 212, 0.3)'
+                boxShadow: isMobile ? '0 0 30px rgba(6, 182, 212, 0.2)' : '0 0 50px rgba(6, 182, 212, 0.3)'
               }}
             >
               <motion.div
@@ -593,9 +493,7 @@ function APropos() {
               <div className="text-center">
                 <motion.div
                   key={currentSkill}
-                  className={`mb-3 sm:mb-4 flex justify-center ${
-                    isMobile ? 'text-4xl' : isTablet ? 'text-5xl' : 'text-6xl'
-                  }`}
+                  className={`mb-3 sm:mb-4 flex justify-center ${isMobile ? 'text-4xl' : isTablet ? 'text-5xl' : 'text-6xl'}`}
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ type: "spring", stiffness: 200 }}
@@ -603,27 +501,16 @@ function APropos() {
                   {skills[currentSkill].logo}
                 </motion.div>
                 <motion.h3
-                  className={`font-bold mb-3 sm:mb-4 ${
-                    isMobile ? 'text-xl' : isTablet ? 'text-2xl' : 'text-3xl'
-                  }`}
-                  style={{
-                    fontFamily: 'OCR A Extended, monospace',
-                    color: skills[currentSkill].color
-                  }}
-                  animate={{
-                    textShadow: `0 0 ${isMobile ? '10px' : '20px'} ${skills[currentSkill].color}`
-                  }}
+                  className={`font-bold mb-3 sm:mb-4 ${isMobile ? 'text-xl' : isTablet ? 'text-2xl' : 'text-3xl'}`}
+                  style={{ fontFamily: 'OCR A Extended, monospace', color: skills[currentSkill].color }}
+                  animate={{ textShadow: `0 0 ${isMobile ? '10px' : '20px'} ${skills[currentSkill].color}` }}
                 >
                   {skills[currentSkill].name}
                 </motion.h3>
                 <div className="relative">
-                  <div className={`w-full bg-gray-700 rounded-full mb-2 ${
-                    isMobile ? 'h-2' : 'h-3'
-                  }`}>
+                  <div className={`w-full bg-gray-700 rounded-full mb-2 ${isMobile ? 'h-2' : 'h-3'}`}>
                     <motion.div
-                      className={`rounded-full ${
-                        isMobile ? 'h-2' : 'h-3'
-                      }`}
+                      className={`rounded-full ${isMobile ? 'h-2' : 'h-3'}`}
                       style={{ backgroundColor: skills[currentSkill].color }}
                       initial={{ width: 0 }}
                       animate={{ width: `${skills[currentSkill].level}%` }}
@@ -631,29 +518,21 @@ function APropos() {
                     />
                   </div>
                   <motion.div
-                    className={`text-right font-bold ${
-                      isMobile ? 'text-xs' : 'text-sm'
-                    }`}
-                    style={{
-                      fontFamily: 'OCR A Extended, monospace',
-                      color: skills[currentSkill].color
-                    }}
+                    className={`text-right font-bold ${isMobile ? 'text-xs' : 'text-sm'}`}
+                    style={{ fontFamily: 'OCR A Extended, monospace', color: skills[currentSkill].color }}
                   >
                     {skills[currentSkill].level}%
                   </motion.div>
                 </div>
               </div>
             </motion.div>
-            <div className={`grid gap-3 sm:gap-4 ${
-              isMobile ? 'grid-cols-3' : 'grid-cols-3'
-            }`}>
+
+            <div className="grid grid-cols-3 gap-3 sm:gap-4">
               {skills.map((skill, index) => (
                 <motion.div
                   key={skill.name}
                   className={`p-3 sm:p-4 rounded-lg border transition-all duration-300 cursor-pointer ${
-                    index === currentSkill
-                      ? 'bg-white/10 border-cyan-400'
-                      : 'bg-gray-900/30 border-gray-700 hover:border-purple-500'
+                    index === currentSkill ? 'bg-white/10 border-cyan-400' : 'bg-gray-900/30 border-gray-700 hover:border-purple-500'
                   }`}
                   whileHover={{ scale: isMobile ? 1.02 : 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -663,36 +542,21 @@ function APropos() {
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <div className={`mb-2 flex justify-center ${
-                    isMobile ? 'text-lg' : 'text-2xl'
-                  }`}>
+                  <div className={`mb-2 flex justify-center ${isMobile ? 'text-lg' : 'text-2xl'}`}>
                     {skill.logo}
                   </div>
-                  <div
-                    className={`font-bold text-center ${
-                      isMobile ? 'text-xs leading-tight' : 'text-xs'
-                    }`}
-                    style={{
-                      fontFamily: 'OCR A Extended, monospace',
-                      color: index === currentSkill ? skill.color : '#9CA3AF'
-                    }}
-                  >
+                  <div className={`font-bold text-center ${isMobile ? 'text-xs leading-tight' : 'text-xs'}`}
+                    style={{ fontFamily: 'OCR A Extended, monospace', color: index === currentSkill ? skill.color : '#9CA3AF' }}>
                     {skill.name}
                   </div>
-                  <div
-                    className={`text-center mt-1 ${
-                      isMobile ? 'text-xs' : 'text-xs'
-                    }`}
-                    style={{
-                      fontFamily: 'OCR A Extended, monospace',
-                      color: index === currentSkill ? skill.color : '#6B7280'
-                    }}
-                  >
+                  <div className="text-center mt-1 text-xs"
+                    style={{ fontFamily: 'OCR A Extended, monospace', color: index === currentSkill ? skill.color : '#6B7280' }}>
                     {skill.level}%
                   </div>
                 </motion.div>
               ))}
             </div>
+
             <motion.div
               className="bg-black/60 border border-green-500/30 rounded-lg p-4 sm:p-6"
               initial={{ opacity: 0, y: 50 }}
@@ -700,12 +564,8 @@ function APropos() {
               transition={{ delay: 0.5 }}
               viewport={{ once: true }}
             >
-              <h3
-                className={`font-bold text-green-400 mb-3 sm:mb-4 flex items-center ${
-                  isMobile ? 'text-base' : isTablet ? 'text-lg' : 'text-xl'
-                }`}
-                style={{ fontFamily: 'OCR A Extended, monospace' }}
-              >
+              <h3 className={`font-bold text-green-400 mb-3 sm:mb-4 flex items-center ${isMobile ? 'text-base' : isTablet ? 'text-lg' : 'text-xl'}`}
+                style={{ fontFamily: 'OCR A Extended, monospace' }}>
                 <span className="mr-2">📊</span>
                 {isMobile ? 'STATS' : 'STATISTIQUES ACADÉMIQUES'}
               </h3>
@@ -724,29 +584,12 @@ function APropos() {
                     transition={{ delay: index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <span
-                      className={`text-gray-400 ${
-                        isMobile ? 'text-xs' : 'text-sm'
-                      }`}
-                      style={{ fontFamily: 'OCR A Extended, monospace' }}
-                    >
-                      {stat.label}:
-                    </span>
+                    <span className={`text-gray-400 ${isMobile ? 'text-xs' : 'text-sm'}`}
+                      style={{ fontFamily: 'OCR A Extended, monospace' }}>{stat.label}:</span>
                     <motion.span
-                      className={`font-bold ${
-                        isMobile ? 'text-base' : 'text-lg'
-                      }`}
-                      style={{
-                        fontFamily: 'OCR A Extended, monospace',
-                        color: stat.color
-                      }}
-                      animate={{
-                        textShadow: [
-                          `0 0 5px ${stat.color}`,
-                          `0 0 ${isMobile ? '15px' : '20px'} ${stat.color}`,
-                          `0 0 5px ${stat.color}`
-                        ]
-                      }}
+                      className={`font-bold ${isMobile ? 'text-base' : 'text-lg'}`}
+                      style={{ fontFamily: 'OCR A Extended, monospace', color: stat.color }}
+                      animate={{ textShadow: [`0 0 5px ${stat.color}`, `0 0 ${isMobile ? '15px' : '20px'} ${stat.color}`, `0 0 5px ${stat.color}`] }}
                       transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
                     >
                       {stat.value}
@@ -757,6 +600,7 @@ function APropos() {
             </motion.div>
           </motion.div>
         </div>
+
         <motion.div
           className="mt-12 sm:mt-16 lg:mt-20 text-center px-4"
           initial={{ opacity: 0, y: 50 }}
@@ -764,14 +608,9 @@ function APropos() {
           transition={{ duration: 1 }}
           viewport={{ once: true }}
         >
-          <motion.div
-            className="relative inline-block"
-            whileHover={{ scale: isMobile ? 1.02 : 1.05 }}
-          >
+          <motion.div className="relative inline-block" whileHover={{ scale: isMobile ? 1.02 : 1.05 }}>
             <motion.blockquote
-              className={`text-cyan-400 font-bold italic max-w-4xl mx-auto leading-relaxed ${
-                isMobile ? 'text-lg' : isTablet ? 'text-xl lg:text-2xl' : 'text-2xl lg:text-3xl'
-              }`}
+              className={`text-cyan-400 font-bold italic max-w-4xl mx-auto leading-relaxed ${isMobile ? 'text-lg' : isTablet ? 'text-xl lg:text-2xl' : 'text-2xl lg:text-3xl'}`}
               style={{ fontFamily: 'OCR A Extended, monospace' }}
               animate={{
                 textShadow: [
@@ -787,23 +626,15 @@ function APropos() {
             {!isMobile && (
               <>
                 <motion.span
-                  className={`absolute text-purple-500/30 ${
-                    isTablet ? 'text-4xl -top-6 -left-6' : 'text-6xl -top-8 -left-8'
-                  }`}
+                  className={`absolute text-purple-500/30 ${isTablet ? 'text-4xl -top-6 -left-6' : 'text-6xl -top-8 -left-8'}`}
                   animate={{ rotate: [0, 360, 0] }}
                   transition={{ duration: 10, repeat: Infinity }}
-                >
-                  "
-                </motion.span>
+                >"</motion.span>
                 <motion.span
-                  className={`absolute text-purple-500/30 ${
-                    isTablet ? 'text-4xl -bottom-6 -right-6' : 'text-6xl -bottom-8 -right-8'
-                  }`}
+                  className={`absolute text-purple-500/30 ${isTablet ? 'text-4xl -bottom-6 -right-6' : 'text-6xl -bottom-8 -right-8'}`}
                   animate={{ rotate: [360, 0, 360] }}
                   transition={{ duration: 10, repeat: Infinity }}
-                >
-                  "
-                </motion.span>
+                >"</motion.span>
               </>
             )}
           </motion.div>
